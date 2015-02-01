@@ -43,23 +43,12 @@ public class Icebreaker {
 	}
 		
 	public int pumpBreaker(int icestr) {
-		/*
-		int totalPumpCost = 0;
-		while (breakerstr < icestr) {
-			breakerstr += pumpvalue;
-			totalPumpCost += pumpcost;
-		}
-		return totalPumpCost;
-		*/
 		int diff = icestr - this.strength;
 		int pumps = (int) Math.ceil(diff / this.pumpValue);
 		return pumps * this.pumpCost;
 	}
 
 	public int costToBreak(ICE ice) {
-		int totalBreakCost = 0;
-		totalBreakCost += pumpBreaker(ice.getStrength());
-		totalBreakCost += (ice.getSubs() * this.breakCost);
-		return totalBreakCost;
+		return pumpBreaker(ice.getStrength()) + (ice.getSubs() * this.breakCost);
 	}
 }
