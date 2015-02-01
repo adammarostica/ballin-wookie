@@ -1,0 +1,3 @@
+
+Icebreaker test = new Icebreaker("Test", 9, 2, 1, 2, 1);test.costToBreak(lotusField)ICE lotusField = new ICE("Lotus Field", 5, 4, 1);Icebreaker gordianBlade = new Icebreaker("Gordian Blade", 4, 2, 1, 1, 1);
+gordianBlade.costToBreak(lotusField)ICE archer = new ICE("Archer", 4, 6, 4);Icebreaker femmeFatale = new Icebreaker("Femme Fatale", 9, 2, 2, 1, 1);femmeFatale.costToBreak(archer)
