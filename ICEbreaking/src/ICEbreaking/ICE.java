@@ -1,17 +1,25 @@
 package ICEbreaking;
 
+import java.util.Set;
+
 public class ICE {
 	
-	String name;
-	int rezCost;
-	int strength;
-	int subs;
+	public enum IceType {
+		BARRIER, CODE_GATE, SENTRY
+	}
+	
+	protected String name;
+	protected int rezCost;
+	protected int strength;
+	protected int subs;
+	protected Set<IceType> iceTypes;
 
-	public ICE(String name, int rezCost, int strength, int subs) {
+	public ICE(String name, int rezCost, int strength, int subs, Set<IceType> iceTypes) {
 		this.name = name;
 		this.rezCost = rezCost;
 		this.strength = strength;
 		this.subs = subs;
+		this.iceTypes = iceTypes;
 	}
 
 	public String getName() {
@@ -28,5 +36,9 @@ public class ICE {
 
 	public int getSubs() {
 		return subs;
+	}
+	
+	public Set<IceType> getIceTypes() {
+		return iceTypes;
 	}
 }
