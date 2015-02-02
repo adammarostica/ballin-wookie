@@ -60,7 +60,29 @@ public class Icebreaker {
 		return pumps * this.pumpCost;
 	}
 
-	public int costToBreak(ICE ice) {
+	public int costToBreak(ICE ice) throws UnbreakableException {
+		if (!this.canBreak(ice)) {
+			throw new UnbreakableException(this.name + " can't break " + ice.getName());
+		}
 		return pumpBreaker(ice.getStrength()) + (ice.getSubs() * this.breakCost);
+	}
+	
+	protected boolean canBreak(ICE ice) {
+		if (ice.getIceTypes().contains(ICE.IceType.BARRIER)) {
+			if (breakerTypes.contains(Icebreaker.IcebreakerType.FRACTER)) {
+				return true;
+			}
+		}
+		else if (ice.getIceTypes().contains(ICE.IceType.CODE_GATE)) {
+			if (breakerTypes.contains(Icebreaker.IcebreakerType.DECODER)) {
+				return true;
+			}
+		}
+		else if (ice.getIceTypes().contains(ICE.IceType.SENTRY)) {
+			if (breakerTypes.contains(Icebreaker.IcebreakerType.KILLER)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
