@@ -3,10 +3,6 @@ package ICEbreaking;
 import java.util.Set;
 
 public class Icebreaker {
-
-	public enum IcebreakerType {
-		FRACTER, DECODER, KILLER
-	}
 	
 	protected String name;
 	protected int installCost;
@@ -14,16 +10,16 @@ public class Icebreaker {
 	protected int pumpValue;
 	protected int pumpCost;
 	protected int breakCost;
-	protected Set<IcebreakerType> breakerTypes;
+	protected Set<ICE.IceType> breaks;
 	
-	public Icebreaker(String name, int installCost, int strength, int pumpCost, int pumpValue, int breakCost, Set<IcebreakerType> breakerTypes) {
+	public Icebreaker(String name, int installCost, int strength, int pumpCost, int pumpValue, int breakCost, Set<ICE.IceType> breaks) {
 		this.name = name;
 		this.installCost = installCost;
 		this.strength = strength;
 		this.pumpCost = pumpCost;
 		this.pumpValue = pumpValue;
 		this.breakCost = breakCost;
-		this.breakerTypes = breakerTypes;
+		this.breaks = breaks;
 	}
 		
 	public String getName() {
@@ -49,10 +45,6 @@ public class Icebreaker {
 	public int getBreakCost() {
 		return breakCost;
 	}
-	
-	public Set<IcebreakerType> getBreakerTypes() {
-		return breakerTypes;
-	}
 		
 	public int pumpBreaker(int icestr) {
 		int diff = icestr - this.strength;
@@ -60,28 +52,18 @@ public class Icebreaker {
 		return pumps * this.pumpCost;
 	}
 
-	public int costToBreak(ICE ice) throws UnbreakableException {
+	public int costToBreak(ICE ice) {
 		if (!this.canBreak(ice)) {
-			throw new UnbreakableException(this.name + " can't break " + ice.getName());
+			return Integer.MAX_VALUE;
 		}
 		return pumpBreaker(ice.getStrength()) + (ice.getSubs() * this.breakCost);
 	}
 	
 	protected boolean canBreak(ICE ice) {
-		if (ice.getIceTypes().contains(ICE.IceType.BARRIER)) {
-			if (breakerTypes.contains(Icebreaker.IcebreakerType.FRACTER)) {
+		for (ICE.IceType t : this.breaks) {
+			if (ice.getIceTypes().contains(t)) {
 				return true;
-			}
-		}
-		else if (ice.getIceTypes().contains(ICE.IceType.CODE_GATE)) {
-			if (breakerTypes.contains(Icebreaker.IcebreakerType.DECODER)) {
-				return true;
-			}
-		}
-		else if (ice.getIceTypes().contains(ICE.IceType.SENTRY)) {
-			if (breakerTypes.contains(Icebreaker.IcebreakerType.KILLER)) {
-				return true;
-			}
+			}	
 		}
 		return false;
 	}

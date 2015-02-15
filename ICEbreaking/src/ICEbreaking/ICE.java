@@ -5,7 +5,13 @@ import java.util.Set;
 public class ICE {
 	
 	public enum IceType {
-		BARRIER, CODE_GATE, SENTRY
+		BARRIER,
+		CODE_GATE,
+		SENTRY,
+		DESTROYER,
+		AP,
+		MYTHIC,
+		GRAIL
 	}
 	
 	protected String name;
@@ -20,6 +26,11 @@ public class ICE {
 		this.strength = strength;
 		this.subs = subs;
 		this.iceTypes = iceTypes;
+	}
+
+	@Override
+	public String toString() {
+		return this.name;
 	}
 
 	public String getName() {
