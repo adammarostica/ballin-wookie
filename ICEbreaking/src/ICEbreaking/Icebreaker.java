@@ -1,22 +1,26 @@
 package ICEbreaking;
 
-public class Icebreaker {
+import java.util.Set;
 
+public class Icebreaker {
+	
 	protected String name;
 	protected int installCost;
 	protected int strength;
 	protected int pumpValue;
 	protected int pumpCost;
 	protected int breakCost;
+	protected Set<ICE.IceType> breaks;
 	
-	public Icebreaker(String name, int installCost, int strength, int pumpCost, int pumpValue, int breakCost) {
+	public Icebreaker(String name, int installCost, int strength, int pumpCost, int pumpValue, int breakCost, Set<ICE.IceType> breaks) {
 		this.name = name;
 		this.installCost = installCost;
 		this.strength = strength;
 		this.pumpCost = pumpCost;
 		this.pumpValue = pumpValue;
 		this.breakCost = breakCost;
-		}
+		this.breaks = breaks;
+	}
 		
 	public String getName() {
 		return name;
@@ -49,6 +53,18 @@ public class Icebreaker {
 	}
 
 	public int costToBreak(ICE ice) {
+		if (!this.canBreak(ice)) {
+			return Integer.MAX_VALUE;
+		}
 		return pumpBreaker(ice.getStrength()) + (ice.getSubs() * this.breakCost);
+	}
+	
+	protected boolean canBreak(ICE ice) {
+		for (ICE.IceType t : this.breaks) {
+			if (ice.getIceTypes().contains(t)) {
+				return true;
+			}	
+		}
+		return false;
 	}
 }
