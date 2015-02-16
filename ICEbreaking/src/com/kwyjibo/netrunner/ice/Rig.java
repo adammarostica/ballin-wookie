@@ -1,4 +1,4 @@
-package ICEbreaking;
+package com.kwyjibo.netrunner.ice;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ public class Rig {
 		this.breakers.add(ib);
 	}
 	
-	public int getCostToBreak(ICE ice) {
+	public int getCostToBreak(Ice ice) {
 		int cheapestCost = Integer.MAX_VALUE;
 		for (Icebreaker ib : this.breakers) {
 			if (ib.canBreak(ice)) {
@@ -30,10 +30,10 @@ public class Rig {
 		return cheapestCost; 
 	}
 	
-	public Map<ICE, Integer> buildIceMap(List<ICE> iceList) {
-		Map<ICE, Integer> iceMap = new HashMap<ICE, Integer>();
+	public Map<Ice, Integer> buildIceMap(List<Ice> iceList) {
+		Map<Ice, Integer> iceMap = new HashMap<Ice, Integer>();
 		
-		for (ICE ice : iceList) {
+		for (Ice ice : iceList) {
 			int cost = this.getCostToBreak(ice);
 			iceMap.put(ice, cost);
 		}

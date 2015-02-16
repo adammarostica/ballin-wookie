@@ -1,4 +1,4 @@
-package ICEbreaking;
+package com.kwyjibo.netrunner.ice;
 
 import java.util.Set;
 
@@ -10,9 +10,9 @@ public class Icebreaker {
 	protected int pumpValue;
 	protected int pumpCost;
 	protected int breakCost;
-	protected Set<ICE.IceType> breaks;
+	protected Set<IceType> breaks;
 	
-	public Icebreaker(String name, int installCost, int strength, int pumpCost, int pumpValue, int breakCost, Set<ICE.IceType> breaks) {
+	public Icebreaker(String name, int installCost, int strength, int pumpCost, int pumpValue, int breakCost, Set<IceType> breaks) {
 		this.name = name;
 		this.installCost = installCost;
 		this.strength = strength;
@@ -52,15 +52,15 @@ public class Icebreaker {
 		return pumps * this.pumpCost;
 	}
 
-	public int costToBreak(ICE ice) {
+	public int costToBreak(Ice ice) {
 		if (!this.canBreak(ice)) {
 			return Integer.MAX_VALUE;
 		}
 		return pumpBreaker(ice.getStrength()) + (ice.getSubs() * this.breakCost);
 	}
 	
-	protected boolean canBreak(ICE ice) {
-		for (ICE.IceType t : this.breaks) {
+	protected boolean canBreak(Ice ice) {
+		for (IceType t : this.breaks) {
 			if (ice.getIceTypes().contains(t)) {
 				return true;
 			}	
