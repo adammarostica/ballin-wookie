@@ -5,24 +5,25 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import ICEbreaking.ICE;
+import com.kwyjibo.netrunner.ice.Ice;
+import com.kwyjibo.netrunner.ice.IceType;
 
 public class IceDB {
 	
-	public static List<ICE> getAll() {
-		List<ICE> iceList = new ArrayList<ICE>();
-		iceList.add(new ICE("Lotus Field", 5, 4, 1,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.CODE_GATE))));
-		iceList.add(new ICE("Archer", 4, 6, 4,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.SENTRY, ICE.IceType.DESTROYER))));
-		iceList.add(new ICE("Ice Wall", 1, 1, 1,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.BARRIER))));
-		iceList.add(new ICE("Enigma", 3, 2, 2,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.CODE_GATE))));
-		iceList.add(new ICE("Neural Katana", 4, 3, 1,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.SENTRY, ICE.IceType.AP))));
-		iceList.add(new ICE("Excalibur", 2, 3, 1,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.GRAIL, ICE.IceType.MYTHIC))));
+	public static List<Ice> getAll() {
+		List<Ice> iceList = new ArrayList<Ice>();
+		iceList.add(new Ice("Lotus Field", 5, 4, 1,
+				new HashSet<IceType>(Arrays.asList(IceType.CODE_GATE))));
+		iceList.add(new Ice("Archer", 4, 6, 4,
+				new HashSet<IceType>(Arrays.asList(IceType.SENTRY, IceType.DESTROYER))));
+		iceList.add(new Ice("Ice Wall", 1, 1, 1,
+				new HashSet<IceType>(Arrays.asList(IceType.BARRIER))));
+		iceList.add(new Ice("Enigma", 3, 2, 2,
+				new HashSet<IceType>(Arrays.asList(IceType.CODE_GATE))));
+		iceList.add(new Ice("Neural Katana", 4, 3, 1,
+				new HashSet<IceType>(Arrays.asList(IceType.SENTRY, IceType.AP))));
+		iceList.add(new Ice("Excalibur", 2, 3, 1,
+				new HashSet<IceType>(Arrays.asList(IceType.GRAIL, IceType.MYTHIC))));
 		return iceList;
 		
 	}

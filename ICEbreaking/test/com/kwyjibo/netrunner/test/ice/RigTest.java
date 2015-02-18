@@ -1,4 +1,4 @@
-package test;
+package com.kwyjibo.netrunner.test.ice;
 
 import static org.junit.Assert.*;
 
@@ -10,28 +10,30 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.kwyjibo.netrunner.ice.Ice;
+import com.kwyjibo.netrunner.ice.IceType;
+import com.kwyjibo.netrunner.ice.Icebreaker;
+import com.kwyjibo.netrunner.ice.Rig;
+
 import util.IceDB;
-import ICEbreaking.ICE;
-import ICEbreaking.Icebreaker;
-import ICEbreaking.Rig;
 
 public class RigTest {
 
-	protected List<ICE> iceList = new ArrayList<ICE>();
+	protected List<Ice> iceList = new ArrayList<Ice>();
 	protected Rig rig = new Rig();
 	
 	@Before
 	public void setUp() throws Exception {
-		iceList.add(new ICE("Lotus Field", 5, 4, 1,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.CODE_GATE))));
-		iceList.add(new ICE("Archer", 4, 6, 4,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.SENTRY))));
-		iceList.add(new ICE("Ice Wall", 1, 1, 1,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.BARRIER))));
+		iceList.add(new Ice("Lotus Field", 5, 4, 1,
+				new HashSet<IceType>(Arrays.asList(IceType.CODE_GATE))));
+		iceList.add(new Ice("Archer", 4, 6, 4,
+				new HashSet<IceType>(Arrays.asList(IceType.SENTRY))));
+		iceList.add(new Ice("Ice Wall", 1, 1, 1,
+				new HashSet<IceType>(Arrays.asList(IceType.BARRIER))));
 		rig.addBreaker(new Icebreaker("Gordian Blade", 4, 2, 1, 1, 1,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.CODE_GATE))));
+				new HashSet<IceType>(Arrays.asList(IceType.CODE_GATE))));
 		rig.addBreaker(new Icebreaker("Femme Fatale", 9, 2, 2, 1, 1,
-				new HashSet<ICE.IceType>(Arrays.asList(ICE.IceType.SENTRY))));
+				new HashSet<IceType>(Arrays.asList(IceType.SENTRY))));
 	}
 
 	@Test

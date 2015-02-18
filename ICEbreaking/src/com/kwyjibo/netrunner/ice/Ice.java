@@ -1,18 +1,8 @@
-package ICEbreaking;
+package com.kwyjibo.netrunner.ice;
 
 import java.util.Set;
 
-public class ICE {
-	
-	public enum IceType {
-		BARRIER,
-		CODE_GATE,
-		SENTRY,
-		DESTROYER,
-		AP,
-		MYTHIC,
-		GRAIL
-	}
+public class Ice {
 	
 	protected String name;
 	protected int rezCost;
@@ -20,7 +10,7 @@ public class ICE {
 	protected int subs;
 	protected Set<IceType> iceTypes;
 
-	public ICE(String name, int rezCost, int strength, int subs, Set<IceType> iceTypes) {
+	public Ice(String name, int rezCost, int strength, int subs, Set<IceType> iceTypes) {
 		this.name = name;
 		this.rezCost = rezCost;
 		this.strength = strength;
