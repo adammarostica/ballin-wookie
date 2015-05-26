@@ -3,19 +3,16 @@ package com.kwyjibo.netrunner.test.ice;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.kwyjibo.netrunner.ice.Ice;
-import com.kwyjibo.netrunner.ice.IceType;
-import com.kwyjibo.netrunner.ice.Icebreaker;
 import com.kwyjibo.netrunner.ice.Rig;
 
 import util.IceDB;
+import util.IcebreakerDB;
 
 public class RigTest {
 
@@ -24,16 +21,12 @@ public class RigTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		iceList.add(new Ice("Lotus Field", 5, 4, 1,
-				new HashSet<IceType>(Arrays.asList(IceType.CODE_GATE))));
-		iceList.add(new Ice("Archer", 4, 6, 4,
-				new HashSet<IceType>(Arrays.asList(IceType.SENTRY))));
-		iceList.add(new Ice("Ice Wall", 1, 1, 1,
-				new HashSet<IceType>(Arrays.asList(IceType.BARRIER))));
-		rig.addBreaker(new Icebreaker("Gordian Blade", 4, 2, 1, 1, 1,
-				new HashSet<IceType>(Arrays.asList(IceType.CODE_GATE))));
-		rig.addBreaker(new Icebreaker("Femme Fatale", 9, 2, 2, 1, 1,
-				new HashSet<IceType>(Arrays.asList(IceType.SENTRY))));
+		iceList.add(IceDB.lotusField);
+		iceList.add(IceDB.archer);
+		iceList.add(IceDB.iceWall);
+		rig.addBreaker(IcebreakerDB.gordianBlade);
+		rig.addBreaker(IcebreakerDB.mimic);
+		rig.addBreaker(IcebreakerDB.corroder);
 	}
 
 	@Test
@@ -43,11 +36,23 @@ public class RigTest {
 	
 	@Test
 	public void testCheapestUnbreakable() {
-		assertEquals(Integer.MAX_VALUE, this.rig.getCostToBreak(this.iceList.get(2)));
+		assertEquals(Integer.MAX_VALUE, this.rig.getCostToBreak(this.iceList.get(1)));
 	}
 
 	@Test
 	public void testMap() {
 		System.out.println(this.rig.buildIceMap(IceDB.getAll()));
 	}
-}
+	
+	@Test
+	public void testTotalCostAndNumUnbreakables() {
+		System.out.println("There are " + this.rig.numUnbreakables(IceDB.getAll()) + " ICE that can not be broken with this rig.");
+		System.out.println("The total cost to break each ICE (that can be broken) once with this rig is " + this.rig.totalCostToBreak(IceDB.getAll()) + " credits."); 
+	}
+	
+	@Test
+	public void testTotalInstallCost() {
+		assertEquals(9, rig.totalInstallCost());
+	}
+	
+}	

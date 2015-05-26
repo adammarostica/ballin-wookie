@@ -2,43 +2,45 @@ package com.kwyjibo.netrunner.test.ice;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import org.junit.Test;
 
-import com.kwyjibo.netrunner.ice.Ice;
-import com.kwyjibo.netrunner.ice.IceType;
-import com.kwyjibo.netrunner.ice.Icebreaker;
+import util.IceDB;
+import util.IcebreakerDB;
+
 
 public class IcebreakingTests {
 
 	@Test
 	public void testIcebreakingCosts() {
-		Ice lotusField = new Ice("Lotus Field", 5, 4, 1,
-				new HashSet<IceType>(Arrays.asList(IceType.CODE_GATE)));
+				
+		assertEquals(3, IcebreakerDB.gordianBlade.costToBreak(IceDB.lotusField));
 		
-		Icebreaker test = new Icebreaker("Test", 9, 2, 1, 2, 1,
-				new HashSet<IceType>(Arrays.asList(IceType.CODE_GATE)));
-		assertEquals(2, test.costToBreak(lotusField));
+		assertEquals(12, IcebreakerDB.femmeFatale.costToBreak(IceDB.archer));
 		
-		Icebreaker gordianBlade = new Icebreaker("Gordian Blade", 4, 2, 1, 1, 1,
-				new HashSet<IceType>(Arrays.asList(IceType.CODE_GATE)));
-		assertEquals(3, gordianBlade.costToBreak(lotusField));
+		assertEquals(Integer.MAX_VALUE, IcebreakerDB.mimic.costToBreak(IceDB.archer));
+		assertEquals(Integer.MAX_VALUE, IcebreakerDB.mimic.costToBreak(IceDB.hunter));
 		
-		Ice archer = new Ice("Archer", 4, 6, 4,
-				new HashSet<IceType>(Arrays.asList(IceType.SENTRY)));
-		Icebreaker femmeFatale = new Icebreaker("Femme Fatale", 9, 2, 2, 1, 1,
-				new HashSet<IceType>(Arrays.asList(IceType.SENTRY)));
-		assertEquals(12, femmeFatale.costToBreak(archer));
 	}
 	
+	@Test
+	public void testBreakAllSubs() {
+		
+		assertEquals(2, IcebreakerDB.batteringRam.breakAllSubs(1));
+		assertEquals(2, IcebreakerDB.batteringRam.breakAllSubs(2));
+		assertEquals(4, IcebreakerDB.batteringRam.breakAllSubs(3));
+		assertEquals(12, IcebreakerDB.batteringRam.breakAllSubs(11));
+		
+		assertEquals(1, IcebreakerDB.corroder.breakAllSubs(1));
+		assertEquals(2, IcebreakerDB.corroder.breakAllSubs(2));
+		assertEquals(3, IcebreakerDB.corroder.breakAllSubs(3));
+		assertEquals(11, IcebreakerDB.corroder.breakAllSubs(11));
+		
+	}
+	
+	@Test
 	public void testBreakerCompatibility() {
-		Ice aBarrier = new Ice("Archer", 4, 6, 4,
-				new HashSet<IceType>(Arrays.asList(IceType.BARRIER)));
-		Icebreaker aKiller = new Icebreaker("Femme Fatale", 9, 2, 2, 1, 1,
-				new HashSet<IceType>(Arrays.asList(IceType.SENTRY)));
-		assertEquals(Integer.MAX_VALUE, aKiller.costToBreak(aBarrier));
+
+		assertEquals(Integer.MAX_VALUE, IcebreakerDB.femmeFatale.costToBreak(IceDB.iceWall));
 	}
 
 }

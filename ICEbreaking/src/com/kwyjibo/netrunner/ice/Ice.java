@@ -4,6 +4,8 @@ import java.util.Set;
 
 public class Ice {
 	
+	// Initializes the various features of Ice.
+	// Set<IceType> refers to the class IceType to declare the Ice's different types.
 	protected String name;
 	protected int rezCost;
 	protected int strength;
@@ -18,6 +20,7 @@ public class Ice {
 		this.iceTypes = iceTypes;
 	}
 
+	// Allows code to easily return the Ice's name.
 	@Override
 	public String toString() {
 		return this.name;
